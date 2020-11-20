@@ -41,6 +41,7 @@ public final class XeraBungeeQueueBukkit extends JavaPlugin {
         setGameRule();
         
         getServer().getPluginManager().registerEvents(new BukkitEvents(this), this);
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
     
     @Override
