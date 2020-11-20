@@ -28,6 +28,8 @@ public class BukkitEvents implements Listener {
         if (!plugin.forceLocation) return;
 
         e.getPlayer().teleport(Objects.requireNonNull(generateForcedLocation()));
+
+        e.getPlayer().sendMessage(ChatColor.RED + "You have entered limbo!, type anything to exit");
     }
 
     @EventHandler
@@ -64,14 +66,32 @@ public class BukkitEvents implements Listener {
 
         e.setRespawnLocation(Objects.requireNonNull(generateForcedLocation()));
     }
-
+    //TEST
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+        try {
+            out.writeUTF("Connect");
+            out.writeUTF("hub1");
+        } catch (Exception e) {
+            //nothing
+        }
+        Bukkit.getPlayer(e.getPlayer()).sendPluginMessage(plugin, "BungeeCord", b.toByteArray());
         if (plugin.disableChat) e.setCancelled(true);
     }
-
+    //TEST
     @EventHandler
     public void onCmd(PlayerCommandPreprocessEvent e) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+        try {
+            out.writeUTF("Connect");
+            out.writeUTF("hub1");
+        } catch (Exception e) {
+            //nothing
+        }
+        Bukkit.getPlayer(e.getPlayer()).sendPluginMessage(plugin, "BungeeCord", b.toByteArray());
         if (plugin.disableCmd) e.setCancelled(true);
     }
 
